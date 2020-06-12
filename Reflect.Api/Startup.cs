@@ -37,10 +37,10 @@ namespace Reflect.Api
             {
                 options.AddPolicy("CorsPolicy",
                     builder => builder
-                    .SetIsOriginAllowed((host) => true)
+                    .SetIsOriginAllowed((host) => true)                   
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .AllowCredentials());
+                    .AllowCredentials()); 
             });
             #endregion
 
@@ -84,7 +84,7 @@ namespace Reflect.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors("CorsPolicy");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -93,7 +93,7 @@ namespace Reflect.Api
             });
 
             app.UseSwagger();
-            app.UseCors("CorsPolicy");
+          
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Reflect Api v1");
